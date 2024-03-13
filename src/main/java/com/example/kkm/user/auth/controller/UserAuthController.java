@@ -1,12 +1,11 @@
 package com.example.kkm.user.auth.controller;
 
-import com.example.kkm.user.auth.entity.User;
+import com.example.kkm.user.domain.entity.User;
 import com.example.kkm.user.auth.exception.PasswordNotMatchException;
 import com.example.kkm.user.auth.exception.UserNotFoundException;
-import com.example.kkm.user.auth.model.SignInform;
+import com.example.kkm.user.auth.model.SignInForm;
 import com.example.kkm.user.auth.model.SignUpForm;
 import com.example.kkm.user.auth.model.UserAuthResponseError;
-import com.example.kkm.user.auth.security.TokenProvider;
 import com.example.kkm.user.auth.service.UserAuthService;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
@@ -37,7 +36,6 @@ public class UserAuthController {
         if (errors.hasErrors()) {
             return sendUserAuthResponseErrors(errors);
         }
-
         return userAuthService.signUp(signUpForm);
     }
 
@@ -48,7 +46,7 @@ public class UserAuthController {
      * @return
      */
     @PostMapping("/api/login")
-    public ResponseEntity<?> signIn(@RequestBody @Valid SignInform signInform, Errors errors) {
+    public ResponseEntity<?> signIn(@RequestBody @Valid SignInForm signInform, Errors errors) {
 
         if (errors.hasErrors()) {
             return sendUserAuthResponseErrors(errors);

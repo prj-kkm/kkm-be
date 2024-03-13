@@ -2,12 +2,9 @@ package com.example.kkm.user.auth.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.kkm.user.auth.entity.User;
-import com.example.kkm.user.auth.service.UserAuthService;
+import com.example.kkm.user.domain.entity.User;
 import java.util.Date;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -25,7 +22,7 @@ public class TokenProvider {
 
         return JWT.create()
             .withSubject(user.getEmail())
-            .withClaim("user_id", user.getUser_id())
+            .withClaim("user_id", user.getId())
             .withIssuedAt(now)
             .withExpiresAt(expiredAt)
             .sign(Algorithm.HMAC512(secrectKey.getBytes()));

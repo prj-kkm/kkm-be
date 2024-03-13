@@ -1,6 +1,5 @@
-package com.example.kkm.user.auth.entity;
+package com.example.kkm.user.domain.entity;
 
-import com.example.kkm.user.auth.model.SignUpForm;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,7 +22,7 @@ public class Password {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int password_id;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
