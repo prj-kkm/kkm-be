@@ -1,15 +1,13 @@
 package com.example.kkm.user.profile.controller;
 
-import com.example.kkm.user.profile.domain.ProfileDto;
-import com.example.kkm.user.profile.domain.ProfileInput;
-import com.example.kkm.user.profile.domain.model.Profile;
-import com.example.kkm.user.profile.domain.repository.ProfileRepository;
+import com.example.kkm.user.profile.service.domain.ProfileDto;
+import com.example.kkm.user.profile.service.domain.ProfileInput;
+import com.example.kkm.user.profile.service.domain.repository.ProfileRepository;
 import com.example.kkm.user.profile.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
