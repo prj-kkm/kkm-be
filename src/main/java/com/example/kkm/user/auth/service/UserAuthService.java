@@ -9,6 +9,9 @@ import com.example.kkm.user.auth.repository.UserRepository;
 import com.example.kkm.user.auth.security.TokenProvider;
 import com.example.kkm.user.domain.entity.Password;
 import com.example.kkm.user.domain.entity.User;
+import com.example.kkm.user.profile.service.domain.model.Profile;
+import com.example.kkm.user.profile.service.domain.repository.ProfileRepository;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,7 @@ public class UserAuthService {
 
     private final UserRepository userRepository;
     private final PasswordRepository passwordRepository;
+    private final ProfileRepository profileRepository;
 
     /**
      * 회원가입
@@ -42,6 +46,16 @@ public class UserAuthService {
 
         User user = createUser(signUpForm);
         createPasswordForUser(user, signUpForm.getPassword());
+
+        /*
+            TODO: 닉네임 Unique 처리 필요
+        */
+        String nickName = "User_" + UUID.randomUUID().toString().substring(0, 8);
+
+        Profile profile = new Profile();
+        profile.setUser(user);
+        profile.setNickname(nickName);
+        profileRepository.save(profile);
 
         return ResponseEntity.ok().build();
     }
@@ -99,4 +113,5 @@ public class UserAuthService {
     public String generateJwtToken(User user) {
         return tokenProvider.generateJwtToken(user);
     }
+
 }
