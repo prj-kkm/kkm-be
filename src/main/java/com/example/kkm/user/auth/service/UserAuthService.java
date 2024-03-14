@@ -34,7 +34,6 @@ public class UserAuthService {
      * 회원가입
      *
      * @param signUpForm 회원가입 시 입력하는 정보
-     * @return
      */
     @Transactional
     public ResponseEntity<?> signUp(SignUpForm signUpForm) {
