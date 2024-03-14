@@ -10,8 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MeetingBoardModel {
-    private int id;     //모임 id
+public class MeetingModel {
+
+    private long id;     //모임 id
+    private long userId;    //유저 id
     private String meetingName; //모임명
     private String meetingOverview; // 모임 소개
     private int members; // 모임 인원
