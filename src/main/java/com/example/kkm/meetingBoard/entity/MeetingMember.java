@@ -19,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class MeetingMember {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long meetingMemberId;
