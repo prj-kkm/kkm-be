@@ -25,7 +25,7 @@ public class UserAuthController {
      */
     @PostMapping("/api/signup")
     public ResponseEntity<?> signUp(@RequestBody @Valid SignUpForm signUpForm) {
-        // 회원가입 로직을 처리합니다.
+
         return userAuthService.signUp(signUpForm);
     }
 
@@ -39,6 +39,7 @@ public class UserAuthController {
     public ResponseEntity<?> signIn(@RequestBody @Valid SignInForm signInForm) {
         User user = userAuthService.authenticate(signInForm);
         String token = userAuthService.generateJwtToken(user);
+
         return ResponseEntity.ok(token);
     }
 }

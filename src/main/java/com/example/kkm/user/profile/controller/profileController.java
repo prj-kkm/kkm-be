@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class profileController {
 
     private final ProfileService profileService;
-    private final ProfileRepository profileRepository;
 
     @GetMapping("/profile/{id}")
     public ResponseEntity<ProfileDto> getUserProfile(@PathVariable Long id) {
