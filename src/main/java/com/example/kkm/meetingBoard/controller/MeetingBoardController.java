@@ -30,8 +30,7 @@ public class MeetingBoardController {
     */
 
     private final MeetingBoardRepository meetingBoardRepository;
-    @Autowired
-    private MeetingBoardService meetingBoardService;
+    private final MeetingBoardService meetingBoardService;
 
     @PostMapping("/create/post")
     public ResponseEntity<MeetingBoard> createMeetingBoard(@RequestBody MeetingBoard meetingBoard) {

@@ -1,5 +1,6 @@
 package com.example.kkm.meetingBoard.entity;
 
+import com.example.kkm.user.domain.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,26 +11,31 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
+import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Builder
 public class MeetingBoardHits {
 
     @Id
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @JoinColumn
+    private Long id;
+
     @ManyToOne
-    private MeetingBoard meetingId;
-    @JoinColumn
+    @JoinColumn(name = "meeting_board_id")
+    private MeetingBoard meetingBoard;
+
+    @JoinColumn(name = "user_id")
     @ManyToOne
     private User user;
+
     @Column
     private LocalDateTime regDate;
 }

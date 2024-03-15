@@ -1,6 +1,6 @@
-package com.example.kkm.user.profile.service.domain.repository;
+package com.example.kkm.user.profile.domain.repository;
 
-import com.example.kkm.user.profile.service.domain.model.Profile;
+import com.example.kkm.user.profile.domain.model.Profile;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
