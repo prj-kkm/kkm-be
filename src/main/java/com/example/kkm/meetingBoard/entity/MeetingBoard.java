@@ -1,5 +1,6 @@
 package com.example.kkm.meetingBoard.entity;
 
+import com.example.kkm.user.domain.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,10 +23,10 @@ public class MeetingBoard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long meetingId;
+    private Long id;
 
-    @JoinColumn
     @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column

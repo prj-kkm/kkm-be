@@ -1,5 +1,6 @@
 package com.example.kkm.meetingBoard.entity;
 
+import com.example.kkm.user.domain.entity.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,16 +23,16 @@ public class MeetingMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long meetingMemberId;
+    private Long id;
     //의문점 : 미팅멤버 테이블에 id가 꼭 필요로하는가? 필요로 한다.
 
     @JoinColumn
     @ManyToOne
     private MeetingBoard meetingId;
 
-    @JoinColumn
+    @JoinColumn(name = "user_id")
     @ManyToOne
-    private User userId;
+    private User user;
 
     @Column
     private LocalDateTime joinDate;
