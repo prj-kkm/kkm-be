@@ -1,7 +1,7 @@
-package com.example.kkm.user.profile.service.domain.model;
+package com.example.kkm.user.profile.domain.model;
 
 import com.example.kkm.user.domain.entity.User;
-import com.example.kkm.user.profile.service.domain.ProfileInput;
+import com.example.kkm.user.profile.domain.ProfileInput;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

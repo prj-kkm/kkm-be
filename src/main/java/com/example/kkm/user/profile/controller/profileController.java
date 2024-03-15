@@ -1,8 +1,7 @@
 package com.example.kkm.user.profile.controller;
 
-import com.example.kkm.user.profile.service.domain.ProfileDto;
-import com.example.kkm.user.profile.service.domain.ProfileInput;
-import com.example.kkm.user.profile.service.domain.repository.ProfileRepository;
+import com.example.kkm.user.profile.domain.ProfileDto;
+import com.example.kkm.user.profile.domain.ProfileInput;
 import com.example.kkm.user.profile.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

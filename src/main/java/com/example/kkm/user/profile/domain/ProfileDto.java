@@ -1,7 +1,7 @@
-package com.example.kkm.user.profile.service.domain;
+package com.example.kkm.user.profile.domain;
 
 
-import com.example.kkm.user.profile.service.domain.model.Profile;
+import com.example.kkm.user.profile.domain.model.Profile;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

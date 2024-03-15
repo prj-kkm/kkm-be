@@ -1,4 +1,4 @@
-package com.example.kkm.user.profile.service.domain;
+package com.example.kkm.user.profile.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

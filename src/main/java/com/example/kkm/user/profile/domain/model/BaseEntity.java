@@ -1,4 +1,4 @@
-package com.example.kkm.user.profile.service.domain.model;
+package com.example.kkm.user.profile.domain.model;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
