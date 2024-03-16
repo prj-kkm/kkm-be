@@ -26,5 +26,6 @@ hs_err_pid*
 replay_pid*
 
 .gradle/
+.idea/httpRequests
 
 application.properties
