@@ -2,6 +2,7 @@ package com.example.kkm.post.domain.entity;
 
 import com.example.kkm.post.domain.dto.PostDTO;
 import com.example.kkm.post.domain.model.PostForm;
+import com.example.kkm.post.domain.model.PostUpdateForm;
 import com.example.kkm.user.domain.entity.User;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.Column;
@@ -81,5 +82,15 @@ public class Post {
                     .createdAt(this.createdAt)
                     .updatedAt(this.updatedAt)
                     .build();
+    }
+
+    public void update(PostUpdateForm postUpdateForm) {
+        this.title = postUpdateForm.getTitle();
+        this.contents = postUpdateForm.getContents();
+
+        this.latitude = postUpdateForm.getLatitude();
+        this.longitude = postUpdateForm.getLongitude();
+
+        this.updatedAt = LocalDateTime.now();
     }
 }

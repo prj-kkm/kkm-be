@@ -3,6 +3,7 @@ package com.example.kkm.post.service;
 import com.example.kkm.post.domain.dto.PostDTO;
 import com.example.kkm.post.domain.entity.Post;
 import com.example.kkm.post.domain.model.PostForm;
+import com.example.kkm.post.domain.model.PostUpdateForm;
 import com.example.kkm.post.exception.PostNotFoundException;
 import com.example.kkm.post.repository.PostRepository;
 import com.example.kkm.user.auth.exception.UserNotFoundException;
@@ -36,13 +37,24 @@ public class PostService {
 
     /**
      * 게시글 불러오기
-     * @param post_Id 게시글 ID
+     * @param post_id 게시글 ID
      * @return 조회된 게시글
      */
-    public PostDTO getPostDto(Long post_Id) {
+    public PostDTO getPostDto(Long post_id) {
 
-        Post post = postRepository.findById(post_Id)
+        Post post = postRepository.findById(post_id)
             .orElseThrow(() -> new PostNotFoundException("해당 게시글을 찾을 수 없습니다."));
+
+        return post.toPostDTO();
+    }
+
+    public PostDTO updatePost(Long post_id, PostUpdateForm postUpdateForm) {
+
+        Post post = postRepository.findById(post_id)
+            .orElseThrow(() -> new PostNotFoundException("해당 게시글을 찾을 수 없습니다."));
+
+        post.update(postUpdateForm);
+        postRepository.save(post);
 
         return post.toPostDTO();
     }
