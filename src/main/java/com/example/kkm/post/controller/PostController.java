@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -79,6 +80,21 @@ public class PostController {
         try {
             PostDTO postDTO = postService.updatePost(post_id, postUpdateForm);
             return new ResponseEntity<>(postDTO, HttpStatus.OK);
+        } catch (PostNotFoundException exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    /**
+     * 게시글 삭제를 위한 API
+     * @param post_id 게시글 ID
+     * @return 삭제 결과
+     */
+    @DeleteMapping("/api/post/{post_id}")
+    public ResponseEntity<?> deletePost(@PathVariable Long post_id) {
+        try {
+            postService.deletePost(post_id);
+            return new ResponseEntity<>("게시글이 정상적으로 삭제됐습니다.", HttpStatus.OK);
         } catch (PostNotFoundException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
         }

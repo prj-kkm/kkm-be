@@ -48,14 +48,32 @@ public class PostService {
         return post.toPostDTO();
     }
 
+    /**
+     * 게시글 수정하기
+     * @param post_id 수정할 게시글 ID
+     * @param postUpdateForm 수정할 내용
+     * @return 수정된 게시글 정보
+     */
     public PostDTO updatePost(Long post_id, PostUpdateForm postUpdateForm) {
 
         Post post = postRepository.findById(post_id)
             .orElseThrow(() -> new PostNotFoundException("해당 게시글을 찾을 수 없습니다."));
 
-        post.update(postUpdateForm);
+        post.update(postUpdateForm);    // 게시글 수정
         postRepository.save(post);
 
         return post.toPostDTO();
+    }
+
+    /**
+     * 게시글 삭제하기
+     * @param post_id 삭제할 게시글 ID
+     */
+    public void deletePost(Long post_id) {
+
+        Post post = postRepository.findById(post_id)
+            .orElseThrow(() -> new PostNotFoundException("해당 게시글을 찾을 수 없습니다."));
+
+        postRepository.delete(post);
     }
 }
