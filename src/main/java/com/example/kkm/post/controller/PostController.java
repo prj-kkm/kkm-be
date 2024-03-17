@@ -2,6 +2,7 @@ package com.example.kkm.post.controller;
 
 import com.example.kkm.post.domain.dto.PostDTO;
 import com.example.kkm.post.domain.model.PostForm;
+import com.example.kkm.post.domain.model.PostListRequestFrom;
 import com.example.kkm.post.domain.model.PostResponseError;
 import com.example.kkm.post.domain.model.PostUpdateForm;
 import com.example.kkm.post.exception.PostNotFoundException;
@@ -9,6 +10,7 @@ import com.example.kkm.post.service.PostService;
 import com.example.kkm.user.auth.exception.UserNotFoundException;
 import jakarta.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +61,20 @@ public class PostController {
             return new ResponseEntity<>(postService.getPostDto(post_id), HttpStatus.OK);
         } catch (PostNotFoundException exception) {
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping("/api/post/recent")
+    public ResponseEntity<?> getRecentPosts(@RequestBody PostListRequestFrom postListRequestFrom, Errors errors) {
+        if (errors.hasErrors()) {
+            return sendPostResponseErrors(errors);
+        }
+
+        try {
+            List<PostDTO> recentPosts = postService.getRecentPosts(postListRequestFrom);
+            return new ResponseEntity<>(recentPosts, HttpStatus.OK);
+        } catch (RuntimeException exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 

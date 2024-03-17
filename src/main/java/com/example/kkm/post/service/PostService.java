@@ -3,13 +3,19 @@ package com.example.kkm.post.service;
 import com.example.kkm.post.domain.dto.PostDTO;
 import com.example.kkm.post.domain.entity.Post;
 import com.example.kkm.post.domain.model.PostForm;
+import com.example.kkm.post.domain.model.PostListRequestFrom;
 import com.example.kkm.post.domain.model.PostUpdateForm;
 import com.example.kkm.post.exception.PostNotFoundException;
 import com.example.kkm.post.repository.PostRepository;
 import com.example.kkm.user.auth.exception.UserNotFoundException;
 import com.example.kkm.user.auth.repository.UserRepository;
 import com.example.kkm.user.domain.entity.User;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -75,5 +81,22 @@ public class PostService {
             .orElseThrow(() -> new PostNotFoundException("해당 게시글을 찾을 수 없습니다."));
 
         postRepository.delete(post);
+    }
+
+    public List<PostDTO> getRecentPosts(PostListRequestFrom postListRequestFrom) {
+        Page<Post> posts = postRepository.findAll(
+            PageRequest.of(postListRequestFrom.getPageNumber(),
+                postListRequestFrom.getPostCount(),
+                Direction.DESC, "createdAt")
+        );
+
+        List<PostDTO> results = new ArrayList<>();
+        posts.stream().forEach(
+            post -> {
+                results.add(post.toPostDTO());
+            }
+        );
+
+        return results;
     }
 }
