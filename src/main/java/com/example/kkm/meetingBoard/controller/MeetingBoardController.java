@@ -1,10 +1,9 @@
 package com.example.kkm.meetingBoard.controller;
 
 import com.example.kkm.meetingBoard.entity.MeetingBoard;
-import com.example.kkm.meetingBoard.model.MboardInput;
+import com.example.kkm.meetingBoard.model.MeetingBoardInput;
 import com.example.kkm.meetingBoard.repository.MeetingBoardRepository;
 import com.example.kkm.meetingBoard.service.MeetingBoardService;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,32 +28,42 @@ public class MeetingBoardController {
     }
     */
 
+
     private final MeetingBoardRepository meetingBoardRepository;
+
     private final MeetingBoardService meetingBoardService;
 
     @PostMapping("/create/post")
-    public ResponseEntity<MeetingBoard> createMeetingBoard(@RequestBody MeetingBoard meetingBoard) {
-        return new ResponseEntity<>(meetingBoardService.createMeeting(meetingBoard),
+    public ResponseEntity<MeetingBoard> createMeetingBoard(@RequestBody MeetingBoardInput meetingBoardInput) {
+        return new ResponseEntity<>(meetingBoardService.createMeeting(meetingBoardInput),
             HttpStatus.CREATED);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<MeetingBoard> getMeetingBoardById(
         @PathVariable(value = "id") Long meetingBoardId) {
         return new ResponseEntity<>(meetingBoardService.getMeetingBoardById(meetingBoardId),
             HttpStatus.OK);
     }
+    /*
+    게시글 리스트 조회 기능
 
-    @PutMapping("/{meetingId}")
+    public List<MeetingBoard> getAllMeetingBoard(){
+        return meetingBoardRepository.findAll();
+    }
+
+
+     */
+    @PutMapping("/update/{meetingId}")
     public ResponseEntity<MeetingBoard> updateMeetingBoard(
         @PathVariable(value = "meetingId") Long meetingId,
-        @Validated @RequestBody MeetingBoard meetingBoardDetails) {
+        @Validated @RequestBody MeetingBoardInput meetingBoardInput) {
         MeetingBoard updatedMeetingBaord = meetingBoardService.updateMeeting(meetingId,
-            meetingBoardDetails);
+            meetingBoardInput);
         return ResponseEntity.ok(updatedMeetingBaord);
     }
 
-    @DeleteMapping("/{meetingId}")
+    @DeleteMapping("/delete/{meetingId}")
     public ResponseEntity<?> deleteMeetingBaord(@PathVariable Long meetingId) {
         meetingBoardService.deleteMeetingBoard(meetingId);
         return ResponseEntity.ok().build();

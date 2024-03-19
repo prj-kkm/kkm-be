@@ -28,7 +28,6 @@ public class MeetingMember {
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    //의문점 : 미팅멤버 테이블에 id가 꼭 필요로하는가? 필요로 한다.
 
     @ManyToOne
     @JoinColumn(name = "meeting_board_id")

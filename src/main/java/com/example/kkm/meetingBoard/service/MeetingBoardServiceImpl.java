@@ -2,7 +2,9 @@ package com.example.kkm.meetingBoard.service;
 
 import com.example.kkm.meetingBoard.entity.MeetingBoard;
 import com.example.kkm.meetingBoard.exception.MeetingBoardException;
+import com.example.kkm.meetingBoard.model.MeetingBoardInput;
 import com.example.kkm.meetingBoard.repository.MeetingBoardRepository;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +20,21 @@ public class MeetingBoardServiceImpl implements MeetingBoardService {
 
 
     @Override
-    public MeetingBoard createMeeting(MeetingBoard meetingBoard) {
-        return meetingBoardRepository.save(meetingBoard);
+    public MeetingBoard createMeeting(MeetingBoardInput meetingBoardInput) {
+        MeetingBoard meeting = MeetingBoard.builder()
+            .meetingName(meetingBoardInput.getTitle())
+            .meetingOverview(meetingBoardInput.getContents())
+            .meetingDate(meetingBoardInput.getMeetingDate())
+            .regDate(LocalDateTime.now())
+            .updateDate(LocalDateTime.now())
+            .build();
+
+        return meetingBoardRepository.save(meeting);
+
     }
 
     @Override
-    public MeetingBoard updateMeeting(long meetingId, MeetingBoard meetingBoardDetails) {
+    public MeetingBoard updateMeeting(long meetingId, MeetingBoardInput input) {
         //게시글 찾기
         MeetingBoard existingMeetingBoard = meetingBoardRepository.findById(meetingId)
             .orElseThrow(()-> new MeetingBoardException(meetingId+"의 게시글이 존재하지 않습니다."));
@@ -32,12 +43,11 @@ public class MeetingBoardServiceImpl implements MeetingBoardService {
         if(existingMeetingBoard.isDeleted()){
             throw new IllegalStateException("삭제된 모임게시글은 수정할 수 없습니다.");
         }
-        MeetingBoard meetingBoard = getMeetingBoardById(meetingId);
-        meetingBoard.setMeetingName(meetingBoardDetails.getMeetingName());
-        meetingBoard.setMeetingOverview(meetingBoardDetails.getMeetingOverview());
-        meetingBoard.setMeetingDate(meetingBoardDetails.getMeetingDate());
+        existingMeetingBoard.setMeetingName(input.getTitle());
+        existingMeetingBoard.setMeetingOverview(input.getContents());
+        existingMeetingBoard.setMeetingDate(input.getMeetingDate());
 
-        return meetingBoardRepository.save(meetingBoard);
+        return meetingBoardRepository.save(existingMeetingBoard);
     }
 
     @Override

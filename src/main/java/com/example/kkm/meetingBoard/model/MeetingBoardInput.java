@@ -1,5 +1,7 @@
 package com.example.kkm.meetingBoard.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,10 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class MboardInput {
+public class MeetingBoardInput {
 
     private String title;
     private String contents;
+    @JsonFormat(shape = Shape.STRING,pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime meetingDate;
 
 }
