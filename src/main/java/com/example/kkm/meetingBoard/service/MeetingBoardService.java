@@ -18,5 +18,7 @@ public interface MeetingBoardService {
 
     void deleteMeetingBoard(long meetingId);
 
+    //조회수 기능(로그인 없이도 오름)
+    MeetingBoard incrementViewCountAndGetMeetingBoard(Long meetingId);
 
 }

@@ -1,9 +1,14 @@
 package com.example.kkm.meetingBoard.service;
 
 import com.example.kkm.meetingBoard.entity.MeetingBoard;
+import com.example.kkm.meetingBoard.entity.MeetingBoardHits;
 import com.example.kkm.meetingBoard.exception.MeetingBoardException;
 import com.example.kkm.meetingBoard.model.MeetingBoardInput;
+import com.example.kkm.meetingBoard.repository.MeetingBoardHitsRepository;
 import com.example.kkm.meetingBoard.repository.MeetingBoardRepository;
+import com.example.kkm.user.auth.repository.UserRepository;
+import com.example.kkm.user.domain.entity.User;
+import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,8 @@ public class MeetingBoardServiceImpl implements MeetingBoardService {
         this.meetingBoardRepository = meetingBoardRepository;
     }
 
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public MeetingBoard createMeeting(MeetingBoardInput meetingBoardInput) {
@@ -62,4 +69,17 @@ public class MeetingBoardServiceImpl implements MeetingBoardService {
         meetingBoard.setDeleted(true);
         meetingBoardRepository.save(meetingBoard);
     }
+
+
+    @Override
+    @Transactional
+    public MeetingBoard incrementViewCountAndGetMeetingBoard(Long meetingId) {
+        MeetingBoard meetingBoard = meetingBoardRepository.findById(meetingId)
+            .orElseThrow(()-> new IllegalArgumentException("게시글이 존재하지 않습니다"));
+        meetingBoard.incrementViewCount(); //조회수 증가 메소드 호출
+        //save 호출 없이 변경상항 데이터베이스 반영
+        return meetingBoard;
+    }
+
+
 }

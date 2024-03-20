@@ -49,5 +49,14 @@ public class MeetingBoard {
     @Column
     private boolean deleted;
 
+    //조회수 관련 추가
+
+    @Column
+    private Long viewCount = 0L;
+
+    public void incrementViewCount() {
+        this.viewCount += 1;
+    }
+
 
 }

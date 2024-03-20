@@ -37,5 +37,9 @@ public class MeetingBoardHits {
     private User user;
 
     @Column
+    private Long viewCount;
+
+
+    @Column
     private LocalDateTime regDate;
 }

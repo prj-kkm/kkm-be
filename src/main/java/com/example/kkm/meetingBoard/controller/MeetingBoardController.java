@@ -34,7 +34,8 @@ public class MeetingBoardController {
     private final MeetingBoardService meetingBoardService;
 
     @PostMapping("/create/post")
-    public ResponseEntity<MeetingBoard> createMeetingBoard(@RequestBody MeetingBoardInput meetingBoardInput) {
+    public ResponseEntity<MeetingBoard> createMeetingBoard(
+        @RequestBody MeetingBoardInput meetingBoardInput) {
         return new ResponseEntity<>(meetingBoardService.createMeeting(meetingBoardInput),
             HttpStatus.CREATED);
     }
@@ -42,6 +43,7 @@ public class MeetingBoardController {
     @GetMapping("/get/{id}")
     public ResponseEntity<MeetingBoard> getMeetingBoardById(
         @PathVariable(value = "id") Long meetingBoardId) {
+        meetingBoardService.incrementViewCountAndGetMeetingBoard(meetingBoardId);//조회수 증가
         return new ResponseEntity<>(meetingBoardService.getMeetingBoardById(meetingBoardId),
             HttpStatus.OK);
     }
@@ -52,8 +54,9 @@ public class MeetingBoardController {
         return meetingBoardRepository.findAll();
     }
 
-
      */
+
+
     @PutMapping("/update/{meetingId}")
     public ResponseEntity<MeetingBoard> updateMeetingBoard(
         @PathVariable(value = "meetingId") Long meetingId,
