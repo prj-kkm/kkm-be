@@ -46,9 +46,6 @@ public class UserAuthService {
         User user = createUser(signUpForm);
         createPasswordForUser(user, signUpForm.getPassword());
 
-        /*
-            TODO: 닉네임 Unique 처리 필요
-        */
         String nickName = "User_" + UUID.randomUUID().toString().substring(0, 8);
 
         Profile profile = new Profile();

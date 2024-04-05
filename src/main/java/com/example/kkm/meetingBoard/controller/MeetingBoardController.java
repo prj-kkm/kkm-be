@@ -1,12 +1,9 @@
 package com.example.kkm.meetingBoard.controller;
 
 import com.example.kkm.meetingBoard.entity.MeetingBoard;
-import com.example.kkm.meetingBoard.model.MboardInput;
 import com.example.kkm.meetingBoard.repository.MeetingBoardRepository;
 import com.example.kkm.meetingBoard.service.MeetingBoardService;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -23,12 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/meetingBoard")
 public class MeetingBoardController {
-   /* @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
-    */
-
     private final MeetingBoardRepository meetingBoardRepository;
     private final MeetingBoardService meetingBoardService;
 
@@ -49,13 +40,13 @@ public class MeetingBoardController {
     public ResponseEntity<MeetingBoard> updateMeetingBoard(
         @PathVariable(value = "meetingId") Long meetingId,
         @Validated @RequestBody MeetingBoard meetingBoardDetails) {
-        MeetingBoard updatedMeetingBaord = meetingBoardService.updateMeeting(meetingId,
+        MeetingBoard updatedMeetingBoard = meetingBoardService.updateMeeting(meetingId,
             meetingBoardDetails);
-        return ResponseEntity.ok(updatedMeetingBaord);
+        return ResponseEntity.ok(updatedMeetingBoard);
     }
 
     @DeleteMapping("/{meetingId}")
-    public ResponseEntity<?> deleteMeetingBaord(@PathVariable Long meetingId) {
+    public ResponseEntity<?> deleteMeetingBoard(@PathVariable Long meetingId) {
         meetingBoardService.deleteMeetingBoard(meetingId);
         return ResponseEntity.ok().build();
     }
