@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class MboardInput {
+public class MeetingBoardInput {
 
     private String title;
     private String contents;

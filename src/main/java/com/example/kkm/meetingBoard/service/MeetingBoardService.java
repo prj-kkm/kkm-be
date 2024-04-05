@@ -10,8 +10,6 @@ public interface MeetingBoardService {
 
     MeetingBoard createMeeting(MeetingBoard meetingBoard);
 
-    // MeetingBoard updateMeeting(long meetingId, MeetingModel meetingModel);
-
     MeetingBoard updateMeeting(long meetingId, MeetingBoard meetingBoard);
 
     MeetingBoard getMeetingBoardById(long meetingId);
